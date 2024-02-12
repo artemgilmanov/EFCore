@@ -9,13 +9,12 @@ namespace EFCore.Domain;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("Genres")]
-public class GenreEntity
+[Table("SubCategories")]
+public class SubCategoryEntity
 {
   [Key]
-  public int Id { get; set; }
-  [Column("GenreName")]
+  public int Publisher_Id { get; set; }
+  [Required]
+  [MaxLength(50)]
   public string Name { get; set; }
-  [Column("GenreDisplay")]
-  public int Display { get; set; }
 }
