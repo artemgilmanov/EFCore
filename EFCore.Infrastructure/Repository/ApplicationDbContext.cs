@@ -17,6 +17,9 @@ public class ApplicationDbContext : DbContext
 {
   public DbSet<BookEntity> Books { get; set; }
   public DbSet<GenreEntity> Genres { get; set; }
+  public DbSet<AuthorEntity> Authors { get; set; }
+  public DbSet<PublisherEntity> Publishers { get; set; }
+  public DbSet<SubCategoryEntity> SubCategories { get; set; }
 
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
