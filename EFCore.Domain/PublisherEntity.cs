@@ -13,9 +13,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class PublisherEntity
 {
   [Key]
-
   public int Publisher_Id { get; set; }
   [Required]
   public string Name { get; set; }
   public string Location { get; set; }
+
+  // Navigation Properties 1:m
+  public List<BookEntity> Books { get; set; }
 }
