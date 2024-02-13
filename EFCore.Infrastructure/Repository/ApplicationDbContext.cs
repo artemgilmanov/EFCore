@@ -20,6 +20,7 @@ public class ApplicationDbContext : DbContext
   public DbSet<AuthorEntity> Authors { get; set; }
   public DbSet<PublisherEntity> Publishers { get; set; }
   public DbSet<SubCategoryEntity> SubCategories { get; set; }
+  public DbSet<BookDetailEntity> BookDetails { get; set; }
 
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -30,6 +31,9 @@ public class ApplicationDbContext : DbContext
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     modelBuilder.Entity<BookEntity>().Property(u => u.Price).HasPrecision(10,5);
+
+    // Many to Many Relationship between Book and Author 
+    modelBuilder.Entity<BookAuthorMap>().HasKey(ba => new { ba.Book_Id, ba.Author_Id });
 
     modelBuilder.Entity<BookEntity>().HasData(
       new BookEntity

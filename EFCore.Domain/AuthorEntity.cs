@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EFCore.Domain;
+﻿namespace EFCore.Domain;
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -29,4 +23,6 @@ public class AuthorEntity
       return $"{this.FirstName} {this.LastName}";
     }
   }
+  // Navigation Properties m:m
+  public List<BookAuthorMap> BookAuthorMap { get; set; }
 }
