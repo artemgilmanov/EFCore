@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EFCore.Infrastructure.Repository;
 
-namespace EFCore.Infrastructure.Repository;
-
-using System.Diagnostics.Metrics;
 using Domain;
+using Domain.FluentConfig;
+using Domain.FluentEntities;
 using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
-
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class ApplicationDbContext : DbContext
 {
@@ -22,6 +14,12 @@ public class ApplicationDbContext : DbContext
   public DbSet<SubCategoryEntity> SubCategories { get; set; }
   public DbSet<BookDetailEntity> BookDetails { get; set; }
 
+  public DbSet<Fluent_BookEntity> Fluent_Books { get; set; }
+  public DbSet<Fluent_GenreEntity> Fluent_Genres { get; set; }
+  public DbSet<Fluent_AuthorEntity> Fluent_Authors { get; set; }
+  public DbSet<Fluent_PublisherEntity> Fluent_Publishers { get; set; }
+  public DbSet<Fluent_SubCategoryEntity> Fluent_SubCategories { get; set; }
+  public DbSet<Fluent_BookDetailEntity> Fluent_BookDetails { get; set; }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
@@ -30,10 +28,10 @@ public class ApplicationDbContext : DbContext
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
-    modelBuilder.Entity<BookEntity>().Property(u => u.Price).HasPrecision(10,5);
-
     // Many to Many Relationship between Book and Author 
-    modelBuilder.Entity<BookAuthorMap>().HasKey(ba => new { ba.Book_Id, ba.Author_Id });
+    modelBuilder.Entity<BookAuthorMap>().HasKey(u => new { u.Author_Id, u.Book_Id });
+
+    modelBuilder.ApplyConfigurationsFromAssembly(typeof(EntityConfig).Assembly);
 
     modelBuilder.Entity<BookEntity>().HasData(
       new BookEntity
@@ -53,6 +51,33 @@ public class ApplicationDbContext : DbContext
         Price = 9.99m
       },
       new BookEntity
+      {
+        Id = 3,
+        Title = "Fahrenheit 451",
+        Author = "Ray Bradbury",
+        Isbn = "978-1451673319",
+        Price = 9.99m
+      }
+    );
+
+    modelBuilder.Entity<Fluent_BookEntity>().HasData(
+      new Fluent_BookEntity
+      {
+        Id = 1,
+        Title = "1984",
+        Author = "George Orwell",
+        Isbn = "978-0451524935",
+        Price = 9.99m
+      },
+      new Fluent_BookEntity
+      {
+        Id = 2,
+        Title = "Brave New World",
+        Author = "Aldous Huxley",
+        Isbn = "978-0060850524",
+        Price = 9.99m
+      },
+      new Fluent_BookEntity
       {
         Id = 3,
         Title = "Fahrenheit 451",
