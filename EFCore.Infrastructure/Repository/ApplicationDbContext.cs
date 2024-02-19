@@ -4,7 +4,7 @@ using Domain;
 using Domain.FluentConfig;
 using Domain.FluentEntities;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
 public class ApplicationDbContext : DbContext
 {
   public DbSet<BookEntity> Books { get; set; }
@@ -23,7 +23,8 @@ public class ApplicationDbContext : DbContext
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
-    optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=EFCore;TrustServerCertificate=True;Trusted_Connection=True;");
+    optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=EFCore;TrustServerCertificate=True;Trusted_Connection=True; Password = k9#MM*Me/Vo")
+      .LogTo(Console.WriteLine, new[] {DbLoggerCategory.Database.Command.Name}, LogLevel.Information);
   }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
