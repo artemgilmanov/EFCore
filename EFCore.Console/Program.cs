@@ -19,6 +19,7 @@ using (ApplicationDbContext context = new())
 }
 */
 
+/*
 AddBook();
 GetAllBooks();
 GetBookById(1);
@@ -39,13 +40,13 @@ async void UpdateBook(int i)
   {
     await using var context = new ApplicationDbContext();
     var book = await context.Books.FindAsync(i);
-    /*
-     books = context.Books.Where(u => u.Publisher_Id == 1);
+    
+    // books = context.Books.Where(u => u.Publisher_Id == 1);
     //foreach (var book in books)
     //{ 
     //  book.Price = 12.99m;
     //}
-    */
+    
     book.Isbn = "978-0451524936";
     await context.SaveChangesAsync();
   }
@@ -61,13 +62,12 @@ async void GetBookById(int i)
   {
     await using var context = new ApplicationDbContext();
     var book = await context.Books.FirstOrDefaultAsync(p => p.Id == i);
-    /*
+    
     // var book_find = context.Books.Find(i);
     // var book_single = context.Books.Single(u => u.Isbn == "978-0451524935");
     // var books_contain = context.Books.Where(u => u.Isbn.Contains("12"));
     // var booksLikeContain = context.Books.Where(u => EF.Functions.Like(u.Isbn,"12%"));
     // var booksLikeContainMax = context.Books.Where(u => EF.Functions.Like(u.Isbn, "12%")).Max(p => p.Price);
-    */
   }
   catch (Exception ex)
   {
@@ -101,3 +101,4 @@ async void GetAllBooks()
     Console.WriteLine(book.Title+ " - " + book.Isbn);
   }
 }
+*/
