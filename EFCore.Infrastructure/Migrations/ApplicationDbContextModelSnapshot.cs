@@ -43,7 +43,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasKey("Author_Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.BookAuthorMap", b =>
@@ -58,7 +58,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasIndex("Book_Id");
 
-                    b.ToTable("BookAuthorMap");
+                    b.ToTable("BookAuthorMap", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.BookDetailEntity", b =>
@@ -86,7 +86,7 @@ namespace EFCore.Infrastructure.Migrations
                     b.HasIndex("Book_Id")
                         .IsUnique();
 
-                    b.ToTable("BookDetails");
+                    b.ToTable("BookDetails", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.BookEntity", b =>
@@ -118,7 +118,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasIndex("Publisher_Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_AuthorEntity", b =>
@@ -142,7 +142,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasKey("Author_Id");
 
-                    b.ToTable("Fluent_Authors");
+                    b.ToTable("Fluent_Authors", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookAuthorMap", b =>
@@ -157,7 +157,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasIndex("Author_Id");
 
-                    b.ToTable("Fluent_BookAuthorMap");
+                    b.ToTable("Fluent_BookAuthorMap", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookDetailEntity", b =>
@@ -185,7 +185,7 @@ namespace EFCore.Infrastructure.Migrations
                     b.HasIndex("Book_Id")
                         .IsUnique();
 
-                    b.ToTable("Fluent_BookDetails");
+                    b.ToTable("Fluent_BookDetails", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookEntity", b =>
@@ -218,7 +218,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasIndex("Publisher_Id");
 
-                    b.ToTable("Fluent_Books");
+                    b.ToTable("Fluent_Books", (string)null);
 
                     b.HasData(
                         new
@@ -267,7 +267,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasKey("Publisher_Id");
 
-                    b.ToTable("Fluent_Publishers");
+                    b.ToTable("Fluent_Publishers", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_SubCategoryEntity", b =>
@@ -285,7 +285,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasKey("Publisher_Id");
 
-                    b.ToTable("Fluent_SubCategories");
+                    b.ToTable("Fluent_SubCategories", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.Fluent_GenreEntity", b =>
@@ -304,7 +304,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Fluent_Genres");
+                    b.ToTable("Fluent_Genres", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.GenreEntity", b =>
@@ -325,7 +325,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.PublisherEntity", b =>
@@ -345,7 +345,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasKey("Publisher_Id");
 
-                    b.ToTable("Publishers");
+                    b.ToTable("Publishers", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.SubCategoryEntity", b =>
@@ -363,7 +363,7 @@ namespace EFCore.Infrastructure.Migrations
 
                     b.HasKey("Publisher_Id");
 
-                    b.ToTable("SubCategories");
+                    b.ToTable("SubCategories", (string)null);
                 });
 
             modelBuilder.Entity("EFCore.Domain.BookAuthorMap", b =>

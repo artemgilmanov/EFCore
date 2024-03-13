@@ -1,5 +1,6 @@
 ﻿namespace EFCore.Infrastructure.Repository;
 
+using System.Net.Mime;
 using Domain;
 using Domain.FluentConfig;
 using Domain.FluentEntities;
@@ -7,12 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 public class ApplicationDbContext : DbContext
 {
+  /*
   public DbSet<BookEntity> Books { get; set; }
   public DbSet<GenreEntity> Genres { get; set; }
   public DbSet<AuthorEntity> Authors { get; set; }
   public DbSet<PublisherEntity> Publishers { get; set; }
   public DbSet<SubCategoryEntity> SubCategories { get; set; }
   public DbSet<BookDetailEntity> BookDetails { get; set; }
+  */
 
   public DbSet<Fluent_BookEntity> Fluent_Books { get; set; }
   public DbSet<Fluent_GenreEntity> Fluent_Genres { get; set; }
@@ -21,19 +24,26 @@ public class ApplicationDbContext : DbContext
   public DbSet<Fluent_SubCategoryEntity> Fluent_SubCategories { get; set; }
   public DbSet<Fluent_BookDetailEntity> Fluent_BookDetails { get; set; }
 
+  public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+  {
+  }
+
+  /*
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
     optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=EFCore;TrustServerCertificate=True;Trusted_Connection=True; Password = k9#MM*Me/Vo")
-      .LogTo(Console.WriteLine, new[] {DbLoggerCategory.Database.Command.Name}, LogLevel.Information);
+      .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information);
   }
+  */
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     // Many to Many Relationship between Book and Author 
-    modelBuilder.Entity<BookAuthorMap>().HasKey(u => new { u.Author_Id, u.Book_Id });
+    // modelBuilder.Entity<BookAuthorMap>().HasKey(u => new { u.Author_Id, u.Book_Id });
 
     modelBuilder.ApplyConfigurationsFromAssembly(typeof(EntityConfig).Assembly);
-
+    
+    /*
     modelBuilder.Entity<BookEntity>().HasData(
       new BookEntity
       {
@@ -60,6 +70,7 @@ public class ApplicationDbContext : DbContext
         Price = 9.99m
       }
     );
+    */
 
     modelBuilder.Entity<Fluent_BookEntity>().HasData(
       new Fluent_BookEntity
