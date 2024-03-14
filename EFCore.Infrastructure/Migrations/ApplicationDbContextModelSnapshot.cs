@@ -10,478 +10,476 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EFCore.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+  [DbContext(typeof(ApplicationDbContext))]
+  partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+  {
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
-#pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+      modelBuilder
+          .HasAnnotation("ProductVersion", "8.0.0")
+          .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+      SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EFCore.Domain.AuthorEntity", b =>
-                {
-                    b.Property<int>("Author_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+      modelBuilder.Entity("EFCore.Domain.AuthorEntity", builder =>
+          {
+            builder.Property<int>("Author_Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Author_Id"));
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("Author_Id"));
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+            builder.Property<DateTime>("BirthDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+            builder.Property<string>("FirstName")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("LastName")
-                        .HasColumnType("int");
+            builder.Property<int>("LastName")
+                      .HasColumnType("int");
 
-                    b.HasKey("Author_Id");
+            builder.HasKey("Author_Id");
 
-                    b.ToTable("Authors", (string)null);
-                });
+            builder.ToTable("Authors", (string)null);
+          });
 
-            modelBuilder.Entity("EFCore.Domain.BookAuthorMap", b =>
-                {
-                    b.Property<int>("Author_Id")
-                        .HasColumnType("int");
+      modelBuilder.Entity("EFCore.Domain.BookAuthorMap", builder =>
+          {
+            builder.Property<int>("Author_Id")
+                      .HasColumnType("int");
 
-                    b.Property<int>("Book_Id")
-                        .HasColumnType("int");
+            builder.Property<int>("Book_Id")
+                      .HasColumnType("int");
 
-                    b.HasKey("Author_Id", "Book_Id");
+            builder.HasKey("Author_Id", "Book_Id");
 
-                    b.HasIndex("Book_Id");
+            builder.HasIndex("Book_Id");
 
-                    b.ToTable("BookAuthorMap", (string)null);
-                });
+            builder.ToTable("BookAuthorMap", (string)null);
+          });
 
-            modelBuilder.Entity("EFCore.Domain.BookDetailEntity", b =>
-                {
-                    b.Property<int>("BookDetail_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+      modelBuilder.Entity("EFCore.Domain.BookDetailEntity", builder =>
+          {
+            builder.Property<int>("BookDetail_Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookDetail_Id"));
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("BookDetail_Id"));
 
-                    b.Property<int>("Book_Id")
-                        .HasColumnType("int");
+            builder.Property<int>("Book_Id")
+                      .HasColumnType("int");
 
-                    b.Property<int>("NumberOfPages")
-                        .HasColumnType("int");
+            builder.Property<int>("NumberOfPages")
+                      .HasColumnType("int");
 
-                    b.Property<int>("NumberofChapters")
-                        .HasColumnType("int");
+            builder.Property<int>("NumberofChapters")
+                      .HasColumnType("int");
 
-                    b.Property<string>("Weight")
-                        .HasColumnType("nvarchar(max)");
+            builder.Property<string>("Weight")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("BookDetail_Id");
+            builder.HasKey("BookDetail_Id");
 
-                    b.HasIndex("Book_Id")
-                        .IsUnique();
+            builder.HasIndex("Book_Id")
+                      .IsUnique();
 
-                    b.ToTable("BookDetails", (string)null);
-                });
+            builder.ToTable("BookDetails", (string)null);
+          });
 
-            modelBuilder.Entity("EFCore.Domain.BookEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+      modelBuilder.Entity("EFCore.Domain.BookEntity", builder =>
+          {
+            builder.Property<int>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("Id"));
 
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
+            builder.Property<string>("Author")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Isbn")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+            builder.Property<string>("Isbn")
+                      .IsRequired()
+                      .HasMaxLength(20)
+                      .HasColumnType("nvarchar(20)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+            builder.Property<decimal>("Price")
+                      .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Publisher_Id")
-                        .HasColumnType("int");
+            builder.Property<int>("Publisher_Id")
+                      .HasColumnType("int");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+            builder.Property<string>("Title")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+            builder.HasKey("Id");
 
-                    b.HasIndex("Publisher_Id");
+            builder.HasIndex("Publisher_Id");
 
-                    b.ToTable("Books", (string)null);
-                });
+            builder.ToTable("Books", (string)null);
+          });
 
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_AuthorEntity", b =>
-                {
-                    b.Property<int>("Author_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_AuthorEntity", builder =>
+          {
+            builder.Property<int>("Author_Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Author_Id"));
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("Author_Id"));
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+            builder.Property<DateTime>("BirthDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+            builder.Property<string>("FirstName")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("LastName")
-                        .HasColumnType("int");
+            builder.Property<int>("LastName")
+                      .HasColumnType("int");
 
-                    b.HasKey("Author_Id");
+            builder.HasKey("Author_Id");
 
-                    b.ToTable("Fluent_Authors", (string)null);
-                });
+            builder.ToTable("Fluent_Authors", (string)null);
+          });
 
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookAuthorMap", b =>
-                {
-                    b.Property<int>("Book_Id")
-                        .HasColumnType("int");
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookAuthorMap", builder =>
+          {
+            builder.Property<int>("Book_Id")
+                      .HasColumnType("int");
+
+            builder.Property<int>("Author_Id")
+                      .HasColumnType("int");
 
-                    b.Property<int>("Author_Id")
-                        .HasColumnType("int");
+            builder.HasKey("Book_Id", "Author_Id");
+
+            builder.HasIndex("Author_Id");
 
-                    b.HasKey("Book_Id", "Author_Id");
+            builder.ToTable("Fluent_BookAuthorMap", (string)null);
+          });
 
-                    b.HasIndex("Author_Id");
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookDetailEntity", builder =>
+          {
+            builder.Property<int>("BookDetail_Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.ToTable("Fluent_BookAuthorMap", (string)null);
-                });
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("BookDetail_Id"));
 
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookDetailEntity", b =>
-                {
-                    b.Property<int>("BookDetail_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            builder.Property<int>("Book_Id")
+                      .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookDetail_Id"));
+            builder.Property<int>("NumberOfPages")
+                      .HasColumnType("int");
 
-                    b.Property<int>("Book_Id")
-                        .HasColumnType("int");
+            builder.Property<int>("NumberofChapters")
+                      .HasColumnType("int");
 
-                    b.Property<int>("NumberOfPages")
-                        .HasColumnType("int");
+            builder.Property<string>("Weight")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumberofChapters")
-                        .HasColumnType("int");
+            builder.HasKey("BookDetail_Id");
 
-                    b.Property<string>("Weight")
-                        .HasColumnType("nvarchar(max)");
+            builder.HasIndex("Book_Id")
+                      .IsUnique();
 
-                    b.HasKey("BookDetail_Id");
+            builder.ToTable("Fluent_BookDetails", (string)null);
+          });
 
-                    b.HasIndex("Book_Id")
-                        .IsUnique();
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookEntity", builder =>
+          {
+            builder.Property<int>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.ToTable("Fluent_BookDetails", (string)null);
-                });
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("Id"));
 
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            builder.Property<string>("Author")
+                      .HasColumnType("nvarchar(max)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+            builder.Property<string>("Isbn")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
+            builder.Property<decimal>("Price")
+                      .HasPrecision(10, 5)
+                      .HasColumnType("decimal(10,5)");
 
-                    b.Property<string>("Isbn")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+            builder.Property<int>("Publisher_Id")
+                      .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasPrecision(10, 5)
-                        .HasColumnType("decimal(10,5)");
+            builder.Property<string>("Title")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Publisher_Id")
-                        .HasColumnType("int");
+            builder.HasKey("Id");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+            builder.HasIndex("Publisher_Id");
 
-                    b.HasKey("Id");
+            builder.ToTable("Fluent_Books", (string)null);
 
-                    b.HasIndex("Publisher_Id");
+            builder.HasData(
+                      new
+                  {
+                    Id = 1,
+                    Author = "George Orwell",
+                    Isbn = "978-0451524935",
+                    Price = 9.99m,
+                    Publisher_Id = 0,
+                    Title = "1984"
+                  },
+                      new
+                  {
+                    Id = 2,
+                    Author = "Aldous Huxley",
+                    Isbn = "978-0060850524",
+                    Price = 9.99m,
+                    Publisher_Id = 0,
+                    Title = "Brave New World"
+                  },
+                      new
+                  {
+                    Id = 3,
+                    Author = "Ray Bradbury",
+                    Isbn = "978-1451673319",
+                    Price = 9.99m,
+                    Publisher_Id = 0,
+                    Title = "Fahrenheit 451"
+                  });
+          });
 
-                    b.ToTable("Fluent_Books", (string)null);
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_PublisherEntity", builder =>
+          {
+            builder.Property<int>("Publisher_Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Author = "George Orwell",
-                            Isbn = "978-0451524935",
-                            Price = 9.99m,
-                            Publisher_Id = 0,
-                            Title = "1984"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Author = "Aldous Huxley",
-                            Isbn = "978-0060850524",
-                            Price = 9.99m,
-                            Publisher_Id = 0,
-                            Title = "Brave New World"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Author = "Ray Bradbury",
-                            Isbn = "978-1451673319",
-                            Price = 9.99m,
-                            Publisher_Id = 0,
-                            Title = "Fahrenheit 451"
-                        });
-                });
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("Publisher_Id"));
 
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_PublisherEntity", b =>
-                {
-                    b.Property<int>("Publisher_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            builder.Property<string>("Location")
+                      .HasColumnType("nvarchar(max)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Publisher_Id"));
+            builder.Property<string>("Name")
+                      .IsRequired()
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
+            builder.HasKey("Publisher_Id");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+            builder.ToTable("Fluent_Publishers", (string)null);
+          });
 
-                    b.HasKey("Publisher_Id");
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_SubCategoryEntity", builder =>
+          {
+            builder.Property<int>("Publisher_Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.ToTable("Fluent_Publishers", (string)null);
-                });
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("Publisher_Id"));
 
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_SubCategoryEntity", b =>
-                {
-                    b.Property<int>("Publisher_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            builder.Property<string>("Name")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("nvarchar(50)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Publisher_Id"));
+            builder.HasKey("Publisher_Id");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+            builder.ToTable("Fluent_SubCategories", (string)null);
+          });
 
-                    b.HasKey("Publisher_Id");
+      modelBuilder.Entity("EFCore.Domain.Fluent_GenreEntity", builder =>
+          {
+            builder.Property<int>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.ToTable("Fluent_SubCategories", (string)null);
-                });
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("Id"));
 
-            modelBuilder.Entity("EFCore.Domain.Fluent_GenreEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            builder.Property<int>("Display")
+                      .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+            builder.Property<string>("Name")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Display")
-                        .HasColumnType("int");
+            builder.HasKey("Id");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+            builder.ToTable("Fluent_Genres", (string)null);
+          });
 
-                    b.HasKey("Id");
+      modelBuilder.Entity("EFCore.Domain.GenreEntity", builder =>
+          {
+            builder.Property<int>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.ToTable("Fluent_Genres", (string)null);
-                });
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("Id"));
 
-            modelBuilder.Entity("EFCore.Domain.GenreEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            builder.Property<int>("Display")
+                      .HasColumnType("int")
+                      .HasColumnName("GenreDisplay");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+            builder.Property<string>("Name")
+                      .HasColumnType("nvarchar(max)")
+                      .HasColumnName("GenreName");
 
-                    b.Property<int>("Display")
-                        .HasColumnType("int")
-                        .HasColumnName("GenreDisplay");
+            builder.HasKey("Id");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("GenreName");
+            builder.ToTable("Genres", (string)null);
+          });
 
-                    b.HasKey("Id");
+      modelBuilder.Entity("EFCore.Domain.PublisherEntity", builder =>
+          {
+            builder.Property<int>("Publisher_Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.ToTable("Genres", (string)null);
-                });
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("Publisher_Id"));
 
-            modelBuilder.Entity("EFCore.Domain.PublisherEntity", b =>
-                {
-                    b.Property<int>("Publisher_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            builder.Property<string>("Location")
+                      .HasColumnType("nvarchar(max)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Publisher_Id"));
+            builder.Property<string>("Name")
+                      .IsRequired()
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
+            builder.HasKey("Publisher_Id");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+            builder.ToTable("Publishers", (string)null);
+          });
 
-                    b.HasKey("Publisher_Id");
+      modelBuilder.Entity("EFCore.Domain.SubCategoryEntity", builder =>
+          {
+            builder.Property<int>("Publisher_Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.ToTable("Publishers", (string)null);
-                });
+            SqlServerPropertyBuilderExtensions.UseIdentityColumn(builder.Property<int>("Publisher_Id"));
 
-            modelBuilder.Entity("EFCore.Domain.SubCategoryEntity", b =>
-                {
-                    b.Property<int>("Publisher_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            builder.Property<string>("Name")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("nvarchar(50)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Publisher_Id"));
+            builder.HasKey("Publisher_Id");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+            builder.ToTable("SubCategories", (string)null);
+          });
 
-                    b.HasKey("Publisher_Id");
+      modelBuilder.Entity("EFCore.Domain.BookAuthorMap", builder =>
+          {
+            builder.HasOne("EFCore.Domain.AuthorEntity", "Author")
+                      .WithMany("BookAuthorMap")
+                      .HasForeignKey("Author_Id")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.ToTable("SubCategories", (string)null);
-                });
+            builder.HasOne("EFCore.Domain.BookEntity", "Book")
+                      .WithMany("BookAuthorMap")
+                      .HasForeignKey("Book_Id")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-            modelBuilder.Entity("EFCore.Domain.BookAuthorMap", b =>
-                {
-                    b.HasOne("EFCore.Domain.AuthorEntity", "Author")
-                        .WithMany("BookAuthorMap")
-                        .HasForeignKey("Author_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EFCore.Domain.BookEntity", "Book")
-                        .WithMany("BookAuthorMap")
-                        .HasForeignKey("Book_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.BookDetailEntity", b =>
-                {
-                    b.HasOne("EFCore.Domain.BookEntity", "Book")
-                        .WithOne("BookDetail")
-                        .HasForeignKey("EFCore.Domain.BookDetailEntity", "Book_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.BookEntity", b =>
-                {
-                    b.HasOne("EFCore.Domain.PublisherEntity", "Publisher")
-                        .WithMany("Books")
-                        .HasForeignKey("Publisher_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Publisher");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookAuthorMap", b =>
-                {
-                    b.HasOne("EFCore.Domain.FluentEntities.Fluent_AuthorEntity", "Author")
-                        .WithMany("BookAuthorMaps")
-                        .HasForeignKey("Author_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EFCore.Domain.FluentEntities.Fluent_BookEntity", "Book")
-                        .WithMany("BookAuthorMaps")
-                        .HasForeignKey("Book_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookDetailEntity", b =>
-                {
-                    b.HasOne("EFCore.Domain.FluentEntities.Fluent_BookEntity", "Book")
-                        .WithOne("BookDetail")
-                        .HasForeignKey("EFCore.Domain.FluentEntities.Fluent_BookDetailEntity", "Book_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookEntity", b =>
-                {
-                    b.HasOne("EFCore.Domain.FluentEntities.Fluent_PublisherEntity", "Publisher")
-                        .WithMany("Books")
-                        .HasForeignKey("Publisher_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Publisher");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.AuthorEntity", b =>
-                {
-                    b.Navigation("BookAuthorMap");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.BookEntity", b =>
-                {
-                    b.Navigation("BookAuthorMap");
-
-                    b.Navigation("BookDetail");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_AuthorEntity", b =>
-                {
-                    b.Navigation("BookAuthorMaps");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookEntity", b =>
-                {
-                    b.Navigation("BookAuthorMaps");
-
-                    b.Navigation("BookDetail");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_PublisherEntity", b =>
-                {
-                    b.Navigation("Books");
-                });
-
-            modelBuilder.Entity("EFCore.Domain.PublisherEntity", b =>
-                {
-                    b.Navigation("Books");
-                });
-#pragma warning restore 612, 618
-        }
+            builder.Navigation("Author");
+
+            builder.Navigation("Book");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.BookDetailEntity", builder =>
+          {
+            builder.HasOne("EFCore.Domain.BookEntity", "Book")
+                      .WithOne("BookDetail")
+                      .HasForeignKey("EFCore.Domain.BookDetailEntity", "Book_Id")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+
+            builder.Navigation("Book");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.BookEntity", builder =>
+          {
+            builder.HasOne("EFCore.Domain.PublisherEntity", "Publisher")
+                      .WithMany("Books")
+                      .HasForeignKey("Publisher_Id")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+
+            builder.Navigation("Publisher");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookAuthorMap", builder =>
+          {
+            builder.HasOne("EFCore.Domain.FluentEntities.Fluent_AuthorEntity", "Author")
+                      .WithMany("BookAuthorMaps")
+                      .HasForeignKey("Author_Id")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+
+            builder.HasOne("EFCore.Domain.FluentEntities.Fluent_BookEntity", "Book")
+                      .WithMany("BookAuthorMaps")
+                      .HasForeignKey("Book_Id")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+
+            builder.Navigation("Author");
+
+            builder.Navigation("Book");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookDetailEntity", builder =>
+          {
+            builder.HasOne("EFCore.Domain.FluentEntities.Fluent_BookEntity", "Book")
+                      .WithOne("BookDetail")
+                      .HasForeignKey("EFCore.Domain.FluentEntities.Fluent_BookDetailEntity", "Book_Id")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+
+            builder.Navigation("Book");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookEntity", builder =>
+          {
+            builder.HasOne("EFCore.Domain.FluentEntities.Fluent_PublisherEntity", "Publisher")
+                      .WithMany("Books")
+                      .HasForeignKey("Publisher_Id")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+
+            builder.Navigation("Publisher");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.AuthorEntity", builder =>
+          {
+            builder.Navigation("BookAuthorMap");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.BookEntity", builder =>
+          {
+            builder.Navigation("BookAuthorMap");
+
+            builder.Navigation("BookDetail");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_AuthorEntity", builder =>
+          {
+            builder.Navigation("BookAuthorMaps");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_BookEntity", builder =>
+          {
+            builder.Navigation("BookAuthorMaps");
+
+            builder.Navigation("BookDetail");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.FluentEntities.Fluent_PublisherEntity", builder =>
+          {
+            builder.Navigation("Books");
+          });
+
+      modelBuilder.Entity("EFCore.Domain.PublisherEntity", builder =>
+          {
+            builder.Navigation("Books");
+          });
     }
+  }
 }
