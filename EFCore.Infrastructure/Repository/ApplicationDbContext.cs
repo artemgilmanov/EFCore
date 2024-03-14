@@ -6,6 +6,7 @@ using Domain.FluentConfig;
 using Domain.FluentEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+
 public class ApplicationDbContext : DbContext
 {
   /*
