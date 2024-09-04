@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EFCore.Infrastructure.Repository;
 
-namespace EFCore.Infrastructure.Repository;
-
-using System.Diagnostics.Metrics;
 using Domain;
 using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
 
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class ApplicationDbContext : DbContext
 {
