@@ -5,7 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
