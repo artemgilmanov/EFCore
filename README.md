@@ -1,1 +1,8 @@
 # EFCore
+
+### Migrations
+
+### DataAnnotations
+
+### Relations
+
