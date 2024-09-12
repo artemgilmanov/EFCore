@@ -5,6 +5,7 @@
 ### DataAnnotations
 
 ### Relations
+```c#
 [Table("Books")]
 public class BookEntity
 {
@@ -27,3 +28,4 @@ public class BookEntity
   public int Publisher_Id { get; set; }
   public PublisherEntity Publisher { get; set; }
 }
+```
