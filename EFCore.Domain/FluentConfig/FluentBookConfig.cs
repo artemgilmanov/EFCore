@@ -14,9 +14,7 @@ public partial class EntityConfig : IEntityTypeConfiguration<Fluent_BookEntity>
     // properties
     modelBuilder
       .Property(u => u.Isbn)
-      .HasMaxLength(50);
-    modelBuilder
-      .Property(u => u.Isbn)
+      .HasMaxLength(50)
       .IsRequired();
     modelBuilder.Ignore(u => u.PriceRange);
     modelBuilder

@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Fluent_SubCategoryEntity
 {
-  public int Publisher_Id { get; set; }
+  public int SubCategory_Id { get; set; }
 
   public string Name { get; set; }
 }
