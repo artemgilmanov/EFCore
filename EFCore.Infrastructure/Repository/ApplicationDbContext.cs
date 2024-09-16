@@ -7,7 +7,7 @@ using Domain.FluentEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
   /*
   public DbSet<BookEntity> Books { get; set; }
@@ -25,25 +25,21 @@ public class ApplicationDbContext : DbContext
   public DbSet<Fluent_SubCategoryEntity> Fluent_SubCategories { get; set; }
   public DbSet<Fluent_BookDetailEntity> Fluent_BookDetails { get; set; }
 
-  public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-  {
-  }
-
   /*
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
-    optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=EFCore;TrustServerCertificate=True;Trusted_Connection=True; Password = k9#MM*Me/Vo")
+    optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=EFCore;TrustServerCertificate=True;Trusted_Connection=True")
       .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information);
   }
   */
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
-    // Many to Many Relationship between Book and Author 
-    // modelBuilder.Entity<BookAuthorMap>().HasKey(u => new { u.Author_Id, u.Book_Id });
+     // Many to Many Relationship between Book and Author 
+    modelBuilder.Entity<Fluent_BookAuthorMap>().HasKey(u => new { u.Author_Id, u.Book_Id });
 
     modelBuilder.ApplyConfigurationsFromAssembly(typeof(EntityConfig).Assembly);
-    
+
     /*
     modelBuilder.Entity<BookEntity>().HasData(
       new BookEntity
@@ -73,31 +69,17 @@ public class ApplicationDbContext : DbContext
     );
     */
 
+    // Seed Publishers
+    modelBuilder.Entity<Fluent_PublisherEntity>().HasData(
+      new Fluent_PublisherEntity { Publisher_Id = 1, Name = "Penguin Books", Location = "New York" },
+      new Fluent_PublisherEntity { Publisher_Id = 2, Name = "HarperCollins", Location = "London" }
+    );
+
+    // Seed Books with valid Publisher_Id
     modelBuilder.Entity<Fluent_BookEntity>().HasData(
-      new Fluent_BookEntity
-      {
-        Id = 1,
-        Title = "1984",
-        Author = "George Orwell",
-        Isbn = "978-0451524935",
-        Price = 9.99m
-      },
-      new Fluent_BookEntity
-      {
-        Id = 2,
-        Title = "Brave New World",
-        Author = "Aldous Huxley",
-        Isbn = "978-0060850524",
-        Price = 9.99m
-      },
-      new Fluent_BookEntity
-      {
-        Id = 3,
-        Title = "Fahrenheit 451",
-        Author = "Ray Bradbury",
-        Isbn = "978-1451673319",
-        Price = 9.99m
-      }
+      new Fluent_BookEntity { Id = 1, Title = "1984", Author = "George Orwell", Isbn = "978-0451524935", Price = 9.99m, Publisher_Id = 1 },
+      new Fluent_BookEntity { Id = 2, Title = "Brave New World", Author = "Aldous Huxley", Isbn = "978-0060850524", Price = 9.99m, Publisher_Id = 2 },
+      new Fluent_BookEntity { Id = 3, Title = "Fahrenheit 451", Author = "Ray Bradbury", Isbn = "978-1451673319", Price = 9.99m, Publisher_Id = 1 }
     );
   }
 }
