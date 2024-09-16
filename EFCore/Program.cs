@@ -1,10 +1,15 @@
+using System.Globalization;
 using EFCore.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
+// Set the default cultures to InvariantCulture
+CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+
+// Add services to the container.
 builder.Services.AddControllers();
 
 // Add EF Core services to the container
