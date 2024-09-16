@@ -16,8 +16,24 @@ public class SubCategoryController : ControllerBase
     this.db = db;
   }
 
+  [HttpPost(Name = "Create")]
+  [ProducesResponseType(typeof(Fluent_SubCategoryEntity), StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+  [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
+  public async Task<IActionResult> Create(Fluent_SubCategoryEntity obj)
+  {
+    await this.db.Fluent_SubCategories.AddAsync(obj);
+    await this.db.SaveChangesAsync();
+    return this.Ok();
+  }
+
   [HttpGet(Name = "GetAll")]
   [ProducesResponseType(typeof(List<Fluent_SubCategoryEntity>), StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(StatusCodes.Status404NotFound)]
+  [ProducesResponseType(StatusCodes.Status500InternalServerError)]
   public async Task<IActionResult> GetAll()
   {
     List<Fluent_SubCategoryEntity> result = await this.db.Fluent_SubCategories.ToListAsync();
@@ -25,9 +41,10 @@ public class SubCategoryController : ControllerBase
   }
 
   [HttpGet(Name = "GetById")]
-  [ProducesResponseType(typeof(List<Fluent_SubCategoryEntity>), StatusCodes.Status200OK)]
+  [ProducesResponseType(typeof(Fluent_SubCategoryEntity), StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
+  [ProducesResponseType(StatusCodes.Status500InternalServerError)]
   public async Task<IActionResult> GetById(int? id)
   {
     if (id is null or 0)
@@ -36,43 +53,33 @@ public class SubCategoryController : ControllerBase
     }
 
     Fluent_SubCategoryEntity obj = new();
-    obj = await this.db.Fluent_SubCategories.FirstOrDefaultAsync(entity => entity.Publisher_Id == id);
+    obj = await this.db.Fluent_SubCategories.FirstOrDefaultAsync(entity => entity.SubCategory_Id == id);
 
     return obj == null ? this.NotFound() : this.Ok(obj);
   }
 
-  [HttpPost(Name = "Update")]
-  [ValidateAntiForgeryToken]
-  [ProducesResponseType(StatusCodes.Status200OK)]
+  [HttpPut(Name = "Update")]
+  [ProducesResponseType(typeof(Fluent_SubCategoryEntity), StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(StatusCodes.Status409Conflict)]
+  [ProducesResponseType(StatusCodes.Status500InternalServerError)]
   public async Task<IActionResult> Update(Fluent_SubCategoryEntity obj)
   {
-    if (!this.ModelState.IsValid)
-    {
-      return this.Ok();
-    }
-
-    if (obj.Publisher_Id == 0)
-    {
-      await this.db.Fluent_SubCategories.AddAsync(obj);
-    }
-    else
-    {
-      this.db.Fluent_SubCategories.Update(obj);
-    }
-
+    this.db.Fluent_SubCategories.Update(obj);
     await this.db.SaveChangesAsync();
     return this.Ok();
   }
 
-  [HttpPost(Name = "Delete")]
-  [ValidateAntiForgeryToken]
-  [ProducesResponseType(StatusCodes.Status200OK)]
+  [HttpDelete(Name = "Delete")]
+  [ProducesResponseType(typeof(Fluent_SubCategoryEntity), StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(StatusCodes.Status500InternalServerError)]
   public async Task<IActionResult> Delete(int id)
   {
     Fluent_SubCategoryEntity obj = new();
-    obj = await this.db.Fluent_SubCategories.FirstOrDefaultAsync(entity => entity.Publisher_Id == id);
+    obj = await this.db.Fluent_SubCategories.FirstOrDefaultAsync(entity => entity.SubCategory_Id == id);
 
-    if (obj == null)
+    if (obj is null)
     {
       return this.NotFound();
     }
