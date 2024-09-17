@@ -9,7 +9,9 @@ public partial class EntityConfig : IEntityTypeConfiguration<Fluent_SubCategoryE
   public void Configure(EntityTypeBuilder<Fluent_SubCategoryEntity> modelBuilder)
   {
     // primary key
-    modelBuilder.HasKey(u => u.Publisher_Id);
+    modelBuilder.HasKey(u => u.SubCategory_Id);
+
+    modelBuilder.Property(u => u.SubCategory_Id).ValueGeneratedOnAdd();
     
     // properties
     modelBuilder.Property(u => u.Name)
