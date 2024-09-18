@@ -76,6 +76,7 @@ foreach(var obj in objList)
 for example there are three books related to a publisher. If there are ten publishers, the query will be executed ten times plus one to retrieve all the books. This condition calls n+1 execution. That is not the most efficient way to access the database. The most efficient would be to use a single call, using inner join, to retrieve all data.
 ```c#
 using Microsoft.EntityFramework;
+
 List<SomeEntity> objList = _db.Books.Include(u => u.Publisher).ToList();
 ```
 # Deferred Execution
