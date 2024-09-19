@@ -132,13 +132,12 @@ return objList;
 ### Lazy Loading Related Data
 
 ### Loading of Related Data
-
 1. Explicit Lading
 Related Data is loaded in separate query.
 - more quey executed
 - reference/Collection Methods
 
-2.Eager Loading
+2. Eager Loading
 Related Data is loaded in the initial query itself.
 - Single query execution
 - .Include/.ThenInclude
