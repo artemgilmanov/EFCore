@@ -79,4 +79,29 @@ using Microsoft.EntityFramework;
 
 List<SomeEntity> objList = _db.Books.Include(u => u.Publisher).ToList();
 ```
-# Deferred Execution
+# IQueryable vs IEnumerable
+
+
+IQueryable interface inherits from IEnumerable.
+Anything you do with IEnumerable can be done with IQueriable
+```c#
+IEnumerable<Books> BookLust = _db.Books;
+var FilteredBook = BookList.Where(b => b.Price > 50).ToList();
+```
+Query returns all the records:
+```sql
+SELECT [b].[BookId], [b].[Category_Id], [b].[bookISBN], [b].[Prise], [b].[Publisher_Id], [b].[Title]
+FROM [books] AS [b]
+```
+Filter is applied in memory.
+
+```c#
+IQueryable<Books> BookList = _db.Books;
+var fileredBook = BookList.Where(b => b.Proce > 50).ToList();
+```
+Query (Returns filtered records):
+```sql
+SELECT [b].[BookId], [b].[Category_Id], [b].[bookISBN], [b].[Prise], [b].[Publisher_Id], [b].[Title]
+FROM [b].[Price] > 500.0E0
+```
+Filter is applied in database.
