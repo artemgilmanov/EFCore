@@ -13,7 +13,9 @@ public class BookEntity
 }
 ```
 ### Migrations
-
+```c#
+migrationBuilder.Sql("INSERT INTO SubCategories VALUES ('Cat 1')");
+```
 ### DataAnnotations
 ```c#
 [Table("Books")]
