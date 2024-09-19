@@ -73,7 +73,7 @@ foreach(var obj in objList)
  _db.Entry(obj).Reference(u=>u.Publisher).Load();
 }
 ```
-# Eager Loading
+### Eager Loading
 
 for example there are three books related to a publisher. If there are ten publishers, the query will be executed ten times plus one to retrieve all the books. This condition calls n+1 execution. That is not the most efficient way to access the database. The most efficient would be to use a single call, using inner join, to retrieve all data.
 ```c#
@@ -81,8 +81,7 @@ using Microsoft.EntityFramework;
 
 List<SomeEntity> objList = _db.Books.Include(u => u.Publisher).ToList();
 ```
-# IQueryable vs IEnumerable
-
+### IQueryable vs IEnumerable
 
 IQueryable interface inherits from IEnumerable.
 Anything you do with IEnumerable can be done with IQueriable
@@ -108,7 +107,7 @@ FROM [b].[Price] > 500.0E0
 ```
 Filter is applied in database.
 
-# Multi-Level Explicit Loading
+### Multi-Level Explicit Loading
 
 How to retrieve all authors associated to a book?
 ```c#
@@ -124,9 +123,27 @@ foreach(var obj in objList)
 }
 return objList;
 ```
-# Eager Loading
+### Eager Loading
 ```c#
 List<Book> objList = _db.Books.Include(u => u.Publisher).Include(u => u.BookuthorMap).ThenIncude(u => u.Author).ToList();
 
 return objList;
 ```
+### Lazy Loading Related Data
+
+### Loading of Related Data
+
+1. Explicit Lading
+Related Data is loaded in separate query.
+- more quey executed
+- reference/Collection Methods
+
+2.Eager Loading
+Related Data is loaded in the initial query itself.
+- Single query execution
+- .Include/.ThenInclude
+
+4. Lazy Loading
+Related data is loaded when navigation property is accessed.
+- .UseLazyLoadingProxies(
+- Virtual navigation properties
