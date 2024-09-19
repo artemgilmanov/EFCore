@@ -107,3 +107,20 @@ SELECT [b].[BookId], [b].[Category_Id], [b].[bookISBN], [b].[Prise], [b].[Publis
 FROM [b].[Price] > 500.0E0
 ```
 Filter is applied in database.
+
+# Multi-Level Explicit Loading
+
+How to retrieve all authors associated to a book?
+```c#
+List<Book> objList = _db.Books.ToList();
+foreach(var obj in objList)
+{
+ _db.Entry(obj).Reference(u => u.Publisher).Load();
+ _db.Entry(obj).Collection(u => u.BookAuthorMap).Load();
+ foreach(var bookAuth in obj.BookAuthorMap)
+  {
+   _db.Entry(bookAuth).Reference(u => u.Author).Load();
+  }
+}
+return objList;
+```
