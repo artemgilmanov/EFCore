@@ -124,3 +124,9 @@ foreach(var obj in objList)
 }
 return objList;
 ```
+# Eager Loading
+```c#
+List<Book> objList = _db.Books.Include(u => u.Publisher).Include(u => u.BookuthorMap).ThenIncude(u => u.Author).ToList();
+
+return objList;
+```
