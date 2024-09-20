@@ -1,90 +1,90 @@
 ﻿namespace EFCore.Api.Controllers;
 
-using Domain.FluentEntities;
+using EFCore.Domain;
 using Infrastructure.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class SubCategoryController : ControllerBase
+public class CategoryController : ControllerBase
 {
   private readonly ApplicationDbContext db;
 
-  public SubCategoryController(ApplicationDbContext db)
+  public CategoryController(ApplicationDbContext db)
   {
     this.db = db;
   }
 
   [HttpPost(Name = "Create")]
-  [ProducesResponseType(typeof(Fluent_SubCategoryEntity), StatusCodes.Status200OK)]
+  [ProducesResponseType(typeof(CategoryEntity), StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
   [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
-  public async Task<IActionResult> Create(Fluent_SubCategoryEntity obj)
+  public async Task<IActionResult> Create(CategoryEntity obj)
   {
-    await this.db.Fluent_SubCategories.AddAsync(obj);
+    await this.db.Categories.AddAsync(obj);
     await this.db.SaveChangesAsync();
     return this.Ok();
   }
 
   [HttpGet(Name = "GetAll")]
-  [ProducesResponseType(typeof(List<Fluent_SubCategoryEntity>), StatusCodes.Status200OK)]
+  [ProducesResponseType(typeof(List<CategoryEntity>), StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
   [ProducesResponseType(StatusCodes.Status500InternalServerError)]
   public async Task<IActionResult> GetAll()
   {
-    List<Fluent_SubCategoryEntity> result = await this.db.Fluent_SubCategories.ToListAsync();
+    List<CategoryEntity> result = await this.db.Categories.ToListAsync();
     return this.Ok(result);
   }
 
   [HttpGet(Name = "GetById")]
-  [ProducesResponseType(typeof(Fluent_SubCategoryEntity), StatusCodes.Status200OK)]
+  [ProducesResponseType(typeof(CategoryEntity), StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
   [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-  public async Task<IActionResult> GetById(int? id)
+  public async Task<IActionResult> GetById(string? id)
   {
-    if (id is null or 0)
+    if (string.IsNullOrEmpty(id))
     {
       return this.BadRequest();
     }
 
-    Fluent_SubCategoryEntity obj = new();
-    obj = await this.db.Fluent_SubCategories.FirstOrDefaultAsync(entity => entity.SubCategory_Id == id);
+    CategoryEntity obj = new();
+    obj = await this.db.Categories.FirstOrDefaultAsync(entity => entity.Id == Guid.Parse(id));
 
     return obj == null ? this.NotFound() : this.Ok(obj);
   }
 
   [HttpPut(Name = "Update")]
-  [ProducesResponseType(typeof(Fluent_SubCategoryEntity), StatusCodes.Status200OK)]
+  [ProducesResponseType(typeof(CategoryEntity), StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   [ProducesResponseType(StatusCodes.Status409Conflict)]
   [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-  public async Task<IActionResult> Update(Fluent_SubCategoryEntity obj)
+  public async Task<IActionResult> Update(CategoryEntity obj)
   {
-    this.db.Fluent_SubCategories.Update(obj);
+    this.db.Categories.Update(obj);
     await this.db.SaveChangesAsync();
     return this.Ok();
   }
 
   [HttpDelete(Name = "Delete")]
-  [ProducesResponseType(typeof(Fluent_SubCategoryEntity), StatusCodes.Status200OK)]
+  [ProducesResponseType(typeof(CategoryEntity), StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-  public async Task<IActionResult> Delete(int id)
+  public async Task<IActionResult> Delete(string? id)
   {
-    Fluent_SubCategoryEntity obj = new();
-    obj = await this.db.Fluent_SubCategories.FirstOrDefaultAsync(entity => entity.SubCategory_Id == id);
+    CategoryEntity obj = new();
+    obj = await this.db.Categories.FirstOrDefaultAsync(entity => entity.Id == Guid.Parse(id));
 
     if (obj is null)
     {
       return this.NotFound();
     }
 
-    this.db.Fluent_SubCategories.Remove(obj);
+    this.db.Categories.Remove(obj);
     await this.db.SaveChangesAsync();
 
     return this.Ok();
