@@ -1,23 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EFCore.Domain;
-
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-[Table("Publishers")]
+﻿namespace EFCore.Domain;
 public class PublisherEntity
 {
-  [Key]
-  public int Publisher_Id { get; set; }
-  [Required]
+  public Guid Id { get; set; }
   public string Name { get; set; }
   public string Location { get; set; }
-
-  // Navigation Properties 1:m
-  public List<BookEntity> Books { get; set; }
+  // Navigation properties
+  public ICollection<BookEntity> Books { get; set; }
 }
