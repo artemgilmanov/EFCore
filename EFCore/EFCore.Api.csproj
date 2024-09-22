@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EFCore.Infrastructure\EFCore.Infrastructure.csproj" />
+    <ProjectReference Include="..\EFCore.Resources\EFCore.Resources.csproj" />
   </ItemGroup>
 
 </Project>
