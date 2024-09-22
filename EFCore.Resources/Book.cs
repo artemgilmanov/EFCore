@@ -1,6 +1,6 @@
 ﻿namespace EFCore.Resources;
 
-public class BookEntity
+public class Book
 {
   public string Title { get; set; }
   public string Author { get; set; }

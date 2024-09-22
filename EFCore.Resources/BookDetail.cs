@@ -1,6 +1,6 @@
 ﻿namespace EFCore.Resources;
 
-public class BookDetailEntity
+public class BookDetail
 {
   public int NumberofChapters { get; set; }
   public int NumberOfPages { get; set; }

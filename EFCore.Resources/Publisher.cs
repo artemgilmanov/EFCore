@@ -1,5 +1,5 @@
 ﻿namespace EFCore.Resources;
-public class PublisherEntity
+public class Publisher
 {
   public string Name { get; set; }
   public string Location { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace EFCore.Resources;
 
-public class CategoryEntity
+public class Category
 {
   public string Name { get; set; }
 }
