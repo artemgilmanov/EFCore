@@ -8,5 +8,5 @@ public class BookDetailEntity
   public string Weight { get; set; }
   // Navigation properties
   public BookEntity Book { get; set; }
-  public int BookId { get; set; }
+  public Guid BookId { get; set; }
 }

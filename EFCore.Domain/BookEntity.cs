@@ -9,7 +9,7 @@ public class BookEntity
   public string PriceRange { get; set; }
   // Navigation properties
   public BookDetailEntity BookDetail { get; set; }
-  public int PublisherId { get; set; }
+  public Guid PublisherId { get; set; }
   public PublisherEntity Publisher { get; set; }
   public ICollection<BookAuthorMap> BookAuthorMaps { get; set; }
 }
