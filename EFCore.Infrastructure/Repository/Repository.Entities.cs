@@ -1,7 +1,6 @@
 ﻿namespace EFCore.Infrastructure.Repository;
 
 using Domain;
-using Domain.FluentConfig;
 using Microsoft.EntityFrameworkCore;
 
 public partial class Repository
