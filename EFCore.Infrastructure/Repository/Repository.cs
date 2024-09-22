@@ -4,15 +4,8 @@ using Domain;
 using Domain.FluentConfig;
 using Microsoft.EntityFrameworkCore;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+public partial class Repository(DbContextOptions<Repository> options) : DbContext(options)
 {
-  public DbSet<BookEntity> Books { get; set; }
-  public DbSet<GenreEntity> Genres { get; set; }
-  public DbSet<AuthorEntity> Authors { get; set; }
-  public DbSet<PublisherEntity> Publishers { get; set; }
-  public DbSet<CategoryEntity> Categories { get; set; }
-  public DbSet<BookDetailEntity> BookDetails { get; set; }
-
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     // Many to Many Relationship between Book and Author 

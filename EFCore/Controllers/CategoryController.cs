@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 [ApiController]
 public class CategoryController : ControllerBase
 {
-  private readonly ApplicationDbContext db;
+  private readonly Repository db;
 
-  public CategoryController(ApplicationDbContext db)
+  public CategoryController(Repository db)
   {
     this.db = db;
   }

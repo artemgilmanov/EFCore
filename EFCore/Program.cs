@@ -13,7 +13,7 @@ CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 builder.Services.AddControllers();
 
 // Add EF Core services to the container
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<Repository>(options =>
 {
   options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection"));
