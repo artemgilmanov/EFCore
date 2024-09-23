@@ -105,7 +105,11 @@ public class BookController : ControllerBase
       return this.BadRequest();
     }
 
-    BookEntity bookEntity = await this.db.Books.FirstOrDefaultAsync(book => book.Id == Guid.Parse(id));
+    BookEntity bookEntity = await this.db.Books
+      .Include(bookEntity => bookEntity.Author)
+      .Include(bookEntity => bookEntity.Publisher)
+      .FirstOrDefaultAsync(book => book.Id == Guid.Parse(id));
+    
     Book bookResource = new Book
     {
       Id = bookEntity.Id.ToString(),
@@ -126,10 +130,18 @@ public class BookController : ControllerBase
       //  .ToList(),
 
       // Avoid duplicate calls for the same publisher Id.
-      Publishers = this.db.Entry(bookEntity).References(u => u.Publisher).Load(),
+      Publishers = new List<Publisher>
+      {
+        new Publisher
+        {
+          Id = bookEntity.Publisher.Id.ToString(),
+          Name = bookEntity.Publisher.Name,
+          Location = bookEntity.Publisher.Location
+        }
+      }
     };
 
-    return bookResource == null ? this.NotFound() : this.Ok(bookResource);
+    return this.Ok(bookResource);
   }
 
   [HttpPut(Name = "Update")]
