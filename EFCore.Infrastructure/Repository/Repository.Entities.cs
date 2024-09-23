@@ -11,4 +11,5 @@ public partial class Repository
   public DbSet<PublisherEntity> Publishers { get; set; }
   public DbSet<CategoryEntity> Categories { get; set; }
   public DbSet<BookDetailEntity> BookDetails { get; set; }
+  public DbSet<BookAuthorMap> BookAuthorMaps { get; set; }
 }

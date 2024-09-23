@@ -2,15 +2,10 @@
 
 public class Author
 {
-  public string Id { get; set; }
-  public string FirstName { get; set; }
-  public int LastName { get; set; }
-  public DateTime BirthDate { get; set; }
-  public string FullName
-  {
-    get
-    {
-      return $"{this.FirstName} {this.LastName}";
-    }
-  }
+  public BookAuthorMap BookAuthor { get; set; }
+  public Book Book { get; set; }
+
+  public IEnumerable<BookAuthorMap> BookAuthorList { get; set; }
+  public IEnumerable<Author> AuthorList { get; set; }
+
 }
