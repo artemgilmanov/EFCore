@@ -1,9 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-using EFCore.Domain;
+﻿using EFCore.Domain;
 using EFCore.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("Console Application.");
 
 /*
 using (ApplicationDbContext context = new())
